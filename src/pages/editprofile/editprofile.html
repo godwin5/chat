@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Profile</ion-title>
+   <ion-buttons end>
+    <button clear  ion-button icon-only color="primary" id="btn" [disabled]='update_btn_status' (click)="update_bio()" item-end>
+      Done
+    </button>
+   </ion-buttons>
+  </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+
+      <form [formGroup]="editform" >
+  
+    
+          <ion-item>
+            <ion-label floating>Name 
+              <span [style.color]=" ntc? 'red' : 'inherit' " [style.display]=" nt? 'none' : 'inline-block' ">{{a}}/{{b}}</span>
+            </ion-label>
+            <ion-input type="text" formControlName="nname" (keyup)="check()" (ionFocus)="focusn()" (input)="con()" (ionBlur)="blurn()" [(ngModel)]="name"></ion-input>
+          </ion-item>
+          <ion-item no-lines text-wrap style="font-size: small">
+            <ion-note>
+              Use only alphabets(A-z and a-z).
+            </ion-note>
+          </ion-item>
+          <ion-item>
+              <ion-label floating>Bio
+                <span [style.color]=" ntcbio? 'red' : 'inherit' " [style.display]=" ntbio? 'none' : 'inline-block' ">{{abio}}/{{bbio}}</span>
+              </ion-label>
+              <ion-textarea type="text" formControlName="nbio" (ionFocus)="focusbio()" (input)="conbio()" (keyup)="check()" (ionBlur)="blurbio()" [(ngModel)]="bio"></ion-textarea>
+            </ion-item>
+            <ion-item no-lines text-wrap style="font-size: small">            
+              <ion-note>
+                Describe Yourself.
+              </ion-note>
+            </ion-item>
+          </form>
+          
+  </ion-content>

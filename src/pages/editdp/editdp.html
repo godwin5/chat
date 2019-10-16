@@ -1,0 +1,16 @@
+
+
+<ion-header>
+  <ion-navbar color="dark">
+  
+  </ion-navbar>
+</ion-header>
+<ion-content style="background: #222">
+<div id="loader">
+<ion-spinner name="dots"></ion-spinner>
+</div>
+<img src="{{Imgurl || '/assets/imgs/nouser.jpg'}}" class="photo" id="s" style="background: #b8b8b8;" alt="">
+  <ion-footer text-center id="foot_of_dp" style="display: none;">
+    <button ion-button color="light" outline round text-center (click)="edit()">Edit</button>
+  </ion-footer>
+</ion-content>

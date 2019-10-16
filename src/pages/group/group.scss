@@ -1,0 +1,85 @@
+page-group {
+  
+  .count
+{
+  
+  position: relative;
+  right: -11px;
+ 
+}
+   #chip{
+     margin-top: 10px;
+     
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+   }
+        /* General CSS Setup */
+      #gcontent{
+
+     }
+     .gchat:last-of-type{
+      margin-bottom: 30px;
+    }
+      .gchat{
+        display: flex;
+        flex-direction: column;
+
+        .gme{
+          float: right;
+          //position: relative;
+          margin: 20px 5px 0px;
+          max-width: 80%;
+      
+      
+padding: 6px 10px 7px;
+      border-radius: 15px 15px 0;
+      background: lightgreen;
+      //box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      font-size: medium;
+     
+        }
+        .gyou{
+          float: left;
+          margin: 20px 35px 0px;
+          max-width: 80%;            
+          padding: 6px 10px 7px;
+          border-radius: 15px 15px 15px 0;
+          background: lightgreen;
+          //box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          font-size: medium;
+      position: relative;
+      span{
+          font-weight: bold;
+          font-size: 9pt;
+      }
+      .avatar{
+     position: absolute;
+     left:-32px;
+     bottom: -10px;
+     border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: 2px solid  rgba(50, 219, 100,0.5);
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 100%;
+        }
+      }
+        }
+      }
+      #typings{
+        border: 1px solid transparent;
+      }
+      
+      .msginput{
+        //background: transparent;
+       
+        #click{
+          font-size: x-large;
+        }
+      }
+}

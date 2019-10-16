@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button ion-button icon-only color="royal">
+      </button>
+    </ion-buttons>
+    <ion-title>Create a Group</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createGroup()" [disabled]='next_btn_status' >
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+  <ion-list id="myTable">
+    <div class="logo" >
+      <img src="{{imagesrc}}" (click)='showConfirm()' id="imgsrc" alt="">
+    </div>
+    <form [formGroup]='nameForm' padding>
+            <ion-item no-lines class="gn" >
+            <ion-label floating>Group Name
+              <span [style.color]=" ntc? 'black' : 'inherit' " [style.display]=" nt? 'none' : 'inline-block' ">{{a}}/{{b}}</span>
+            </ion-label>
+            <ion-input type="text" formControlName="name" [(ngModel)]="nnnn" (focus)="focusn()" (input)="con()" (blur)="blurn()" (keyup)="check()"></ion-input>
+          </ion-item>            
+    </form>
+  
+  
+    
+    <ion-searchbar (keyup)="getItems($event)" (ionClear)='clear()' ></ion-searchbar>
+      <ion-list-header>
+        Select Group Members
+      </ion-list-header>
+      <div *ngIf="searchable">
+        <div *ngFor="let user of resArr;let i=index;">
+    
+          <ion-item *ngIf="user.UID != uid" id="{{i}}">
+    
+            <ion-avatar item-start>
+              <img src="{{user.photoURL || '/assets/imgs/nouser.jpg'}}" alt='' (click)="zoomimgall(club.photoURL)"
+                style="background: #bbb;">
+            </ion-avatar>
+            <ion-label>{{user.Name}}</ion-label>
+            <ion-checkbox  [checked]="c(user.UID)" (ionChange)="checkbox(user.UID)" item-end></ion-checkbox>
+    
+          </ion-item>
+    
+        </div>
+      </div>
+      <div *ngIf="all">
+        <div *ngFor="let user of users | async;let i=index;">
+    
+          <ion-item *ngIf="user.UID != uid" id="{{i}}">
+    
+            <ion-avatar item-start>
+              <img src="{{user.photoURL || '/assets/imgs/nouser.jpg'}}" alt='' (click)="zoomimgall(club.photoURL)"
+                style="background: #bbb;">
+            </ion-avatar>
+            <ion-label>{{user.Name}}</ion-label>
+            <ion-checkbox  [checked]="c(user.UID)" (ionChange)="checkbox(user.UID)" item-end></ion-checkbox>
+    
+          </ion-item>
+    
+        </div>
+      </div>
+    </ion-list>
+</ion-content>

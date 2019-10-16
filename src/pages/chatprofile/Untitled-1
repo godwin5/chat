@@ -1,0 +1,243 @@
+<div id="heads">
+  <ion-header>
+        <ion-item no-lines>
+            <ion-avatar item-start>
+              <img style="background: #bbb" src="{{ photourl || '/assets/imgs/nouser.jpg'}}" alt="">
+            </ion-avatar>
+            <h2>{{name}}</h2>
+          <p id="status_ref">
+                   
+            </p> 
+            <button item-end ion-button clear (click)="close()" color="danger">close</button>
+          </ion-item>
+     
+  </ion-header>
+  </div>
+  
+  <ion-content  id="content" scrollDownOnLoad='true'>
+  
+    <div padding class="chat" *ngFor=" let chat of chatRef | async ">
+        <ng-container *ngIf="(chat.Sender==meid && chat.Receiver==userid) || (chat.Sender==userid && chat.Receiver==meid)">
+            <div class="temp" style="display: none;">{{chat.Text}}</div>
+      <div class="me talk-bubble tri-right round border right-top"  *ngIf="chat.Sender==meid" (swipe)="presentActionSheet(chat.Timestamp,chat.id,chat.Text)">
+          <div class="talktext">
+              <div *ngIf="chat.Text=='imageegamizzqrstrb'" class="imagecontent" (click)="zoomcimg(chat.ImgSrc)">
+                  <img id="{{chat.id}}"  src="{{chat.ImgSrc}}" alt="" srcset="">
+        
+                </div>
+                <p *ngIf="chat.Text!='imageegamizzqrstrb'"> {{chat.Text}}</p>
+  
+            
+              <div *ngIf="chat.Timestamp==null">  
+              <i id="status_icon" class="material-icons">info_outline</i>
+            </div>
+        <div *ngIf="chat.Status==0 && chat.Timestamp">  
+          <i id="status_icon" class="material-icons">done</i>
+        </div>
+        <div *ngIf="chat.Status==1">  
+            <i id="status_icon" class="material-icons">spellcheck</i>
+          </div>
+  
+          </div>
+      </div>
+      <div  *ngIf="chat.Sender!=meid" id="{{chat.id}}" (swipe)="presentActionSheetyou(chat.Timestamp,chat.Text)"  class="you talk-bubble tri-right round border right-top">
+          <div class="talktext">
+            <div *ngIf="chat.Text=='imageegamizzqrstrb'" (click)="zoomcimg(chat.ImgSrc)" class="imagecontent">
+              <img id="{{chat.id}}"  src="{{chat.ImgSrc}}" alt="" srcset="">
+    
+            </div>
+            <p *ngIf="chat.Text!='imageegamizzqrstrb'"> {{chat.Text}}</p>
+
+          </div>
+      </div>
+      </ng-container>
+      
+    </div>
+    
+  
+  </ion-content>
+  <ion-footer no-border>
+   
+   <div  id="msgip">
+    <ion-item  class="msginput">
+      <input type="file"  id="image" style="display: none;" [(ngModel)]="inputFile" (change)="fileChangeListener($event)" accept="image/*">
+    <button ion-button clear icon-only item-start id="imgbtn" (click)="select_image()">
+        <ion-icon name='md-images'></ion-icon>
+    </button>
+    
+    <input (keyup.enter)="send()" color="dark" type="text" placeholder="Type..." id="typings" (focus)="focus()" (input)="input()" [(ngModel)]="text" >
+ 
+    <p item-end (tap)="push_smile()" (press)="taphold()" id="smile">{{icon_name}}</p>
+    <button ion-button clear id="click" (click)="send()" item-end [disabled]="sendbtn">
+      <ion-icon name="ios-send"></ion-icon>
+    </button>
+  </ion-item>
+</div>
+   
+  </ion-footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  page-chatprofile {
+    
+    
+    #status_icon{
+      color: black;
+      font-size:medium;
+      position: absolute;
+      right: -25px;
+      bottom: -8px;
+    }
+      /* General CSS Setup */
+    #content{
+    background: url('https://i.pinimg.com/564x/80/98/9e/80989e0fd3cf4764c3e66f057df8479b.jpg');
+      background-size:100% 100%; 
+      margin-top: 65px;
+      
+      //height: calc(100% - 70px);
+      //background:linear-gradient(to top right,#009e00,#ffff96);
+      font-family: "Ubuntu-Italic", "Lucida Sans", helvetica, sans;
+  
+    }
+    .chat:last-of-type{
+      margin-bottom:60px;
+    }
+    .chat:first-of-type{
+      margin-top: 3px;
+    }
+    .chat{
+      margin-top: -20px;
+      display: flex;
+      flex-direction: column;
+      word-wrap: break-word;
+      .me{
+        margin-top: 100px;
+        align-self: flex-end;
+      height: auto;
+        margin-right: 5px;
+      }
+      
+      .you
+      {
+        align-self: flex-start;
+        
+        color:white;
+      
+      }
+    
+    }
+    
+    /* CSS talk bubble */
+    .me.talk-bubble {
+        margin-top: 20px;
+      display: inline-block;
+      position: relative;
+        max-width: 85%;
+      height: auto;
+      color: black;
+      
+      background-color: wheat;
+      font-size: medium;
+      
+    }
+    .me.border{
+      border: 8px solid wheat;
+    }
+    .you.talk-bubble {
+        margin-top: 20px;
+      display: inline-block;
+      position: relative;
+        max-width: 85%;
+      height: auto;
+      
+     background: chocolate;
+      font-size: medium;
+    }
+    .you.border{
+     border: 8px solid chocolate;
+      
+    }
+    .round{
+      border-radius: 5px;
+    
+    }
+    .talktext{
+      //padding: ;
+        text-align: left;
+      line-height: 1.5em;
+    }
+    .talktext p{
+      /* remove webkit p margins */
+      -webkit-margin-before: 0em;
+      -webkit-margin-after: 0em;
+    }
+    .you.tri-right.right-top:after{
+        content: ' ';
+        position: absolute;
+        width: 0;
+        height: 0;
+      left: -17px;
+      //right: -25px;
+      z-index: -1000;
+      top: -8px;
+       bottom: auto;
+        border: 20px solid;
+        border-color: chocolate transparent transparent transparent;
+    }
+    .me.tri-right.right-top:after{
+        content: ' ';
+        position: absolute;
+        width: 0;
+        height: 0;
+      left: auto;
+      right: -18px;
+      z-index: -1000;
+      top: -8px;
+        bottom: auto;
+        border: 15px solid;
+        border-color: wheat transparent transparent transparent;
+    }
+    .imagecontent{
+  
+      img{
+        margin-bottom: -9px;
+        max-height: 430px;
+      }
+    }
+    #typings{
+      border: 1px solid transparent;
+     
+    }
+    
+    .msginput{
+    position: relative;
+      #click{
+      ion-icon{
+        font-size: xx-large
+      }
+      }
+    }
+    #ip{
+      position: fixed;
+      bottom: 10px;
+      z-index: 10;
+    }
+    
+    }
+        
+        

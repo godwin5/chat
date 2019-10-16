@@ -1,0 +1,36 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Change Password</ion-title>
+    <ion-buttons end>
+      <button clear ion-button [disabled]='change_status' (click)="change_pwd()" >
+        Done
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-item>
+  <ion-label floating>Current Password</ion-label>
+  <ion-input clearOnEdit=fasle [(ngModel)]="currpwd" (input)="check()" type="password"></ion-input>
+</ion-item>
+<ion-item no-lines *ngIf="currpwd">
+  <ion-note style="font-size: small">
+    {{'Current Password: '+ currpwd}}
+  </ion-note>
+</ion-item>
+<ion-item>
+  <ion-label floating>New Password</ion-label>
+  <ion-input clearOnEdit=fasle type="password" (input)="check()" [(ngModel)]="newpwd" ></ion-input>
+</ion-item>
+<ion-item no-lines *ngIf="newpwd">
+  <ion-note style="font-size: small">
+    {{'New Password: '+ newpwd}}
+  </ion-note>
+</ion-item>
+<button ion-button clear (click)="sendmail()" >Send Password Reset Email</button>
+</ion-content>

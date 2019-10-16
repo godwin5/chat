@@ -1,0 +1,21 @@
+page-sgroup {
+
+    .logo{
+       position: relative;
+       top: 10px;
+        text-align: center;
+        img{
+border-radius: 100%;
+border:2px  solid #23bb23;
+        width: 150px;
+        height: 150px;
+        }
+    }
+  
+#nu{
+   position: absolute;
+   z-index:-999;
+   top: 400px;
+}
+
+}

@@ -1,0 +1,31 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-item id="Profile" no-lines>
+  
+    <div id="proimg">
+      <img (click)="zoom()" class="pph" [src]="imgurl || '/assets/imgs/nouser.jpg'" style="background: #bbb" alt="" srcset=""> <br>
+    </div>
+    <b>{{(item | async)?.Name}}</b> <br>
+    <p text-wrap> {{(item | async)?.Bio}}</p>
+  </ion-item>
+  <ion-fab bottom right>
+    <button ion-fab  color="light" mini>
+      <ion-icon name="arrow-round-up"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="gotoedit()" ><ion-icon name="create"></ion-icon></button>
+      <button ion-fab (click)="gotopri()"><ion-icon name="settings"></ion-icon></button>
+      <button ion-fab (click)="logout()"><ion-icon name="log-out"></ion-icon></button>
+      
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

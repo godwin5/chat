@@ -1,0 +1,57 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>
+      Chats
+    </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let user of refs | async">
+      <ion-item (click)="goto_chats(user.UID,user.Name,user.Nickname,user.photoURL)">
+        <ion-avatar item-start>
+          <img style="background: #bbb" alt="" src="{{user.photoURL || '/assets/imgs/nouser.jpg'}}">
+        </ion-avatar>
+        <h2>{{user.Name}}</h2>
+        <div *ngIf="user.LastMessage[u]=='imageegamizzqrstrb' ">
+          <p *ngIf="user.Status[u]==0" style="color:#32db64;font-weight: bold">
+            <ion-icon name="md-images"></ion-icon>
+          </p>
+          <p *ngIf="user.Status[u]==1">
+            <ion-icon name="md-images"></ion-icon>
+          </p>
+        </div>
+
+        <div *ngIf="user.LastMessage[u]!='smileelims' && user.LastMessage[u]!='imageegamizzqrstrb' ">
+          <p *ngIf="user.Status[u]==0" style="color:#32db64;font-weight: bold">{{user.LastMessage[u]}}</p>
+          <p *ngIf="user.Status[u]==1">{{user.LastMessage[u]}}</p>
+        </div>
+
+        <i item-end id="{{'status'+user.UID}}" class="material-icons"></i>
+      </ion-item>
+      <ion-item-options side="right">
+
+        <button ion-button color="danger" (tap)="delete(user.UID)">
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+      <!--  -->
+    </ion-item-sliding>
+    <div *ngIf="(refs | async)?.length==0">
+      <h4 text-center text-wrap padding>
+        No Chats Yet. <br> Tap <ion-icon name="search"></ion-icon> to find some people.
+      </h4>
+    </div>
+
+
+  </ion-list>
+
+</ion-content>

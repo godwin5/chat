@@ -1,0 +1,29 @@
+<!--
+  Generated template for the CemailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Change Email</ion-title>
+    <ion-buttons end>
+      <button clear ion-button [disabled]='change_btn_status' (click)="changeEmail()">
+        Done
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-item>
+  <ion-label floating>New Email Address</ion-label>
+  <ion-input type="email" [(ngModel)]="newemail" (input)="checkc()"></ion-input>
+</ion-item>
+<br>
+  <button ion-button clear  (click)="request()" >Send Verification Email</button>
+
+</ion-content>

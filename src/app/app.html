@@ -1,0 +1,56 @@
+<ion-menu [content]="mycontent" swipeEnabled=false type="overlay">
+       
+    <ion-content>
+        <div *ngIf="uname">
+        <ion-list no-border>
+ 
+            <ion-list-header text-center>
+              Profile
+            </ion-list-header>
+            <ion-item id="Profile">
+              <div id="proimg">
+                <img (click)="zoom()" class="pph" [src]="imgurl || '/assets/imgs/nouser.jpg'" style="background: #bbb" alt="" srcset=""> <br>
+              </div>
+              <b>{{(item | async)?.Name}}</b> <br>
+              <p text-wrap> {{(item | async)?.Bio}}</p>
+            </ion-item>
+            </ion-list>
+            <ion-list no-border>
+
+                <ion-list-header>
+                  More Options
+                </ion-list-header>
+                <ion-item (click)="gotoedit()" >
+                    <ion-icon name="create" item-start></ion-icon>
+                    Edit Profile
+                    
+                  </ion-item>
+                  <ion-item (click)="gotopri()" >
+                      <ion-icon item-start name="settings"></ion-icon>
+                      Settings
+                      
+                    </ion-item>
+                </ion-list>
+                <ion-footer>
+                    <ion-list>
+          
+                      <ion-item (click)="logout()" >
+                        <ion-icon name="log-out" item-start></ion-icon>
+                          Logout
+                        
+                      </ion-item>
+                    </ion-list>
+                  </ion-footer>
+              </div>
+              <div *ngIf="!uname">
+<ion-footer text-center padding>
+Login or SignUp To view More
+</ion-footer>
+              </div>
+    </ion-content>
+   
+
+</ion-menu>
+
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

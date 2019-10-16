@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{gname}}</ion-title>
+    <ion-buttons end>
+        <button (click)="gotoInfo()" ion-button icon-only>
+          <ion-icon name="more"></ion-icon>
+        </button>
+      </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content id="gcontent">
+  <div>
+    <div text-center *ngIf="chip">
+      <ion-chip color="light" id="chip">
+        <ion-avatar>
+          <img src="{{adminpic || '/assets/imgs/nouser.jpg'}}" style="background: #bbb" alt="">
+        </ion-avatar>
+        <ion-label>{{adminname}}</ion-label>
+
+      </ion-chip>
+    </div>
+    <div *ngFor=" let chat of gref | async " class="gchat">
+      <div *ngFor="let user of userslist1">
+        <div class="temp" id="{{chat.id}}" style="display: none;">{{chat.Text}}</div>
+        <div *ngIf="chat.Sender==cuser && chat.Sender==user.UID" class="gme"
+          (swipe)="presentActionSheet(chat.Timestamp,chat.id,chat.Text)">
+          <span *ngIf="chat.Text !='imagesendbyperson'">{{chat.Text}} </span>
+          <span (click)="zoomcimg(chat.ImgSrc)" *ngIf="chat.Text =='imagesendbyperson'">
+            <img src="{{chat.ImgSrc}}" alt="" srcset="">
+          </span>
+
+        </div>
+        <div *ngIf="chat.Sender != cuser">
+          <div *ngIf="chat.Sender==user.UID" class="gyou" (swipe)="presentActionSheetyou(chat.Timestamp,chat.Text)">
+            <span>{{fname(user.Name)}}</span><br>
+            <span *ngIf="chat.Text !='imagesendbyperson'">{{chat.Text}} </span>
+            <span (click)="zoomcimg(chat.ImgSrc)" *ngIf="chat.Text =='imagesendbyperson'">
+              <img src="{{chat.ImgSrc}}" alt="" srcset="">
+            </span>
+            <div class="avatar">
+              <img style="background: #bbb" src="{{ user.photoURL || '/assets/imgs/nouser.jpg'}}" alt="">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+<ion-footer>
+
+  <div id="msgip">
+    <ion-item class="msginput">
+      <input type="file" id="image" style="display: none;" [(ngModel)]="inputFile" (change)="fileChangeListener($event)"
+        accept="image/*">
+      <button ion-button clear icon-only item-start id="imgbtn" (click)="select_image()">
+        <ion-icon style="color:lightgreen" name='md-images'></ion-icon>
+      </button>
+
+      <input (keyup.enter)="send()" color="dark" type="text" placeholder="Type..." id="typings" (input)="input()"
+        [(ngModel)]="text">
+
+      <p item-end (tap)="push_smile()" (press)="taphold()" id="smile">{{icon_name}}</p>
+      <button ion-button clear id="click" (click)="send()" item-end [disabled]="sendbtn">
+        <ion-icon name="ios-send"></ion-icon>
+      </button>
+    </ion-item>
+  </div>
+
+</ion-footer>

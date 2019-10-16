@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>{{name}} <p id="chip"></p></ion-title>
+      <span id="status_ref"></span>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="pro()">
+         
+           <img width="30" height="30" style="border-radius: 100%" src="{{photourl  || '/assets/imgs/nouser.jpg'}}" alt="" srcset="">
+       
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding id="content" >
+      
+
+
+   <div id="messages">
+      <div class="chat" *ngFor=" let chat of chatRef | async ">
+          <div class="temp" style="display: none;">{{chat.Text}}</div>
+    <div class="me" *ngIf="chat.Sender==meid" (swipe)="presentActionSheet(chat.Timestamp,chat.id,chat.Text)">
+        <span *ngIf="chat.Text !='imageegamizzqrstrb'">{{chat.Text}}</span>
+        <img (click)="zoomcimg(chat.ImgSrc)" *ngIf="chat.Text =='imageegamizzqrstrb'" src="{{chat.ImgSrc}}" alt="" srcset="">
+        <div *ngIf="chat.Timestamp==null">
+          <ion-icon id="status_icon" name="ios-information-circle-outline"></ion-icon>
+        </div>
+        <div *ngIf="chat.Status==0 && chat.Timestamp">
+          <i id="status_icon" class="material-icons">
+            done
+            </i>
+        </div>
+        <div *ngIf="chat.Status==2">
+          <i id="status_icon" class="material-icons">
+            done_all
+            </i>
+        </div>
+        <div *ngIf="chat.Status==1"  class="read">
+          <i style="color: darkseagreen" id="status_icon" class="material-icons">
+            done_all
+            </i>
+        </div>
+  
+    </div>
+    <div class="you" *ngIf="chat.Sender!=meid" (swipe)="presentActionSheetyou(chat.Timestamp,chat.Text)">
+    <span *ngIf="chat.Text !='imageegamizzqrstrb'">{{chat.Text}}</span>
+    <img (click)="zoomcimg(chat.ImgSrc)" *ngIf="chat.Text =='imageegamizzqrstrb'" id="imgsrc" src="{{chat.ImgSrc}}" alt="" srcset="">
+      <div class="avatar">
+          <img style="background: #bbb" src="{{ photourl || '/assets/imgs/nouser.jpg'}}" alt="">
+      </div></div>
+     
+      </div>
+    </div>
+     
+   
+   
+    
+  </ion-content>
+  <ion-footer>
+     
+    <div  id="msgip">
+     <ion-item  class="msginput">
+       <input type="file"  id="image" style="display: none;" [(ngModel)]="inputFile" (change)="fileChangeListener($event)" accept="image/*">
+     <button ion-button clear icon-only item-start id="imgbtn"  (click)="select_image()">
+         <ion-icon name='md-images' style="color:lightgreen"></ion-icon>
+     </button>
+     
+     <input (keyup.enter)="send()"  color="dark" type="text" placeholder="Type..." id="typings" (focus)="focus()" (input)="input()" [(ngModel)]="text" >
+  
+     <p item-end (tap)="push_smile()" (press)="taphold()" id="smile">{{icon_name}}</p>
+     <button ion-button clear id="click" (click)="send()" item-end [disabled]="sendbtn">
+       <ion-icon name="ios-send"></ion-icon>
+     </button>
+   </ion-item>
+ </div>
+    
+   </ion-footer>

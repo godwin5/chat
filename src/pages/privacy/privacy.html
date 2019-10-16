@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  
+    <ion-list-header no-lines>Privacy</ion-list-header>
+    <ion-item>
+      <ion-label>Display Me in Search</ion-label>
+      <ion-checkbox item-end [(ngModel)]="dips" (ionChange)="sets()"></ion-checkbox>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label>Allow people to text me</ion-label>
+      <ion-checkbox [(ngModel)]="ptext" (ionChange)="sett()" [disabled]="text_check" item-end></ion-checkbox>
+    </ion-item>
+    <ion-list-header no-lines>Personal Information</ion-list-header>
+    <ion-item>        
+        <h3>Email Address</h3>
+        <h5>{{(item | async)?.Email}}</h5>
+        <button ion-button icon-only clear item-end (click)="cemail()" >
+          <ion-icon name="create"></ion-icon>
+        </button>
+      </ion-item>
+      <button clear ion-button (click)="cpwd()">
+          Change Password
+       </button>
+<br>
+       <button clear ion-button color='danger' (click)="delete()" >
+          Delete Account
+       </button>
+</ion-content>

@@ -1,0 +1,67 @@
+<ion-header>
+
+  <ion-toolbar>
+
+
+    <ion-searchbar debounce=10 (keyup)="getItems($event)" (ionClear)="clear()" placeholder="Find Friends">
+    </ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="searchable">
+    <div *ngFor="let club of resArr;let i=index" no-lines>
+
+      <!-- (click)="goto_pro(club.UID,club.Name,club.photoURL,club.Bio,club.Theme_ID)" -->
+      <ion-item *ngIf="club.UID !=uid && club.SearchStatus==true" id="{{i}}">
+
+        <ion-avatar item-start>
+          <img src="{{club.photoURL || '/assets/imgs/nouser.jpg'}}" alt='' (click)="zoomimgall(club.photoURL)"
+            style="background: #bbb;">
+        </ion-avatar>
+        <div (click)="wrap(club.UID)">
+          <h2 id="{{i}}">{{club.Name}}</h2>
+          <p id="{{club.UID}}">{{club.Bio}}</p>
+        </div>
+        <button *ngIf="club.AllowText==true" large item-end clear ion-button icon-only
+          (click)="goto_chat(club.UID,club.Name,club.photoURL)">
+          <ion-icon name="ios-send-outline"></ion-icon>
+        </button>
+
+
+
+
+      </ion-item>
+    </div>  
+  </div>
+
+
+
+  <div *ngIf="all">
+    <div *ngFor="let club of users | async;let i=index" no-lines>
+
+      <!-- (click)="goto_pro(club.UID,club.Name,club.photoURL,club.Bio,club.Theme_ID)" -->
+      <ion-item *ngIf="club.UID !=uid && club.SearchStatus==true" id="{{i}}">
+
+        <ion-avatar item-start>
+          <img src="{{club.photoURL || '/assets/imgs/nouser.jpg'}}" alt='' (click)="zoomimgall(club.photoURL)"
+            style="background: #bbb;">
+        </ion-avatar>
+        <div (click)="wrap(club.UID)">
+          <h2 id="{{i}}">{{club.Name}}</h2>
+          <p id="{{club.UID}}">{{club.Bio}}</p>
+        </div>
+        <button *ngIf="club.AllowText==true" large item-end clear ion-button icon-only
+          (click)="goto_chat(club.UID,club.Name,club.photoURL)">
+          <ion-icon name="ios-send-outline"></ion-icon>
+        </button>
+
+
+
+
+      </ion-item>
+    </div>
+  </div>
+</ion-content>

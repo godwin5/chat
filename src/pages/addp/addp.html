@@ -1,0 +1,48 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Participants</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="next_btn_status" (click)="add()" >Add</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar (keyup)="getItems($event)" (ionClear)='clear()' ></ion-searchbar>
+  <div *ngIf="searchable">
+    <div *ngFor="let user of resArr;let i=index;">
+
+      <ion-item *ngIf="user.UID != uid" id="{{i}}">
+
+        <ion-avatar item-start>
+          <img src="{{user.photoURL || '/assets/imgs/nouser.jpg'}}" alt='' (click)="zoomimgall(club.photoURL)"
+            style="background: #bbb;">
+        </ion-avatar>
+        <ion-label>{{user.Name}}</ion-label>
+        <ion-checkbox [disabled]="check(user.UID)" [checked]="c(user.UID)" (ionChange)="checkbox(user.UID)" item-end></ion-checkbox>
+
+      </ion-item>
+
+    </div>
+  </div>
+  <div *ngIf="all">
+    <div *ngFor="let user of users | async;let i=index;">
+
+      <ion-item *ngIf="user.UID != uid" id="{{i}}">
+
+        <ion-avatar item-start>
+          <img src="{{user.photoURL || '/assets/imgs/nouser.jpg'}}" alt='' (click)="zoomimgall(club.photoURL)"
+            style="background: #bbb;">
+        </ion-avatar>
+        <ion-label>{{user.Name}}</ion-label>
+        <ion-checkbox [disabled]="check(user.UID)" [checked]="c(user.UID)" (ionChange)="checkbox(user.UID)" item-end></ion-checkbox>
+
+      </ion-item>
+
+    </div>
+  </div>
+</ion-content>

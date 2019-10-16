@@ -1,0 +1,26 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+ 
+<ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input type="email" [(ngModel)]="email" ></ion-input>
+</ion-item>
+<ion-item>
+   <ion-label floating>Password</ion-label>
+   <ion-input type="password" [(ngModel)]="pwd"></ion-input>
+</ion-item>
+<ion-item no-lines text-center>
+  <button ion-button clear small (click)="login()" >Login</button>
+</ion-item>
+<ion-item no-lines text-center style="font-weight: bold;font-size: small">
+   <ion-note>OR</ion-note>
+</ion-item>
+<ion-item no-lines text-center style="font-weight: bold;font-size: small">
+  <ion-note >Need an account? <span style="color: #23bb23" (click)="goto_s()" >Signup Now.</span> </ion-note>
+</ion-item>
+</ion-content>
